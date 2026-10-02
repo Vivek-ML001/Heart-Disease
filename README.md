@@ -13,7 +13,7 @@ The trained model achieved a **5-Fold Cross-Validation ROC-AUC of 0.9551** on th
 The application is built using **Streamlit** and can be deployed as an interactive web application.
 
 **Live App:**  
-_Add your Streamlit URL here after deployment._
+_https://heart-disease01.streamlit.app/_
 
 ---
 
