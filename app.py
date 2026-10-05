@@ -22,7 +22,7 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("❤️ Heart Disease Prediction")
+st.title(" Heart Disease Prediction")
 st.write(
     "Enter the patient's information below to estimate the model's "
     "predicted heart-disease risk."
