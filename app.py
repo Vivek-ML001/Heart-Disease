@@ -191,7 +191,7 @@ if st.button("🔍 Predict Heart Disease", use_container_width=True):
 
         # Probability
         if hasattr(model, "predict_proba"):
-            probability = model.predict_proba(input_data)[0][1]
+            probability = model.predict_proba(input_data)[0]
         else:
             probability = None
 
