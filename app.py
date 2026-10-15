@@ -36,7 +36,7 @@ except Exception as e:
 # Page Header
 # --------------------------------------------------
 
-st.title("❤️ Heart Disease Prediction")
+st.title(" Heart Disease Prediction")
 
 st.write(
     "Enter patient information to obtain a prediction "
