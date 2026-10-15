@@ -181,49 +181,68 @@ input_data = input_data[feature_names]
 # Prediction
 # --------------------------------------------------
 
+# --------------------------------------------------
+# Prediction
+# --------------------------------------------------
+
 st.divider()
 
 if st.button("🔍 Predict Heart Disease", use_container_width=True):
 
     try:
-
         prediction = model.predict(input_data)[0]
-
-        # Probability
-        if hasattr(model, "predict_proba"):
-            probability = model.predict_proba(input_data)[0][1]
-        else:
-            probability = None
-
 
         st.subheader("Prediction Result")
 
-        if prediction == 1:
+        if hasattr(model, "predict_proba"):
+            probabilities = model.predict_proba(input_data)[0]
+            classes = list(model.classes_)
 
-            st.error("⚠️ Model predicts: Heart Disease")
+            # Get the probability corresponding to the predicted class
+            predicted_index = classes.index(prediction)
+            predicted_probability = float(probabilities[predicted_index])
 
-        else:
-
-            st.success("✅ Model predicts: No Heart Disease")
-
-
-        if probability is not None:
+            # Show the prediction
+            if prediction == 1:
+                st.error("⚠️ Model predicts: Heart Disease")
+            else:
+                st.success("✅ Model predicts: No Heart Disease")
 
             st.metric(
-                "Predicted Probability",
-                f"{probability * 100:.2f}%"
+                "Model Confidence in Predicted Class",
+                f"{predicted_probability * 100:.2f}%"
             )
 
-            st.progress(float(probability))
+            st.progress(predicted_probability)
 
+            # Display probabilities for both classes
+            st.subheader("Class Probabilities")
+
+            for class_label, class_probability in zip(classes, probabilities):
+                class_name = (
+                    "Heart Disease"
+                    if class_label == 1
+                    else "No Heart Disease"
+                )
+
+                st.write(
+                    f"**{class_name}:** "
+                    f"{class_probability * 100:.2f}%"
+                )
+
+        else:
+            if prediction == 1:
+                st.error("⚠️ Model predicts: Heart Disease")
+            else:
+                st.success("✅ Model predicts: No Heart Disease")
+
+            st.warning(
+                "This model does not provide probability estimates."
+            )
 
         with st.expander("View processed input"):
-
             st.dataframe(input_data)
 
-
     except Exception as e:
-
         st.error("Prediction failed.")
-
         st.exception(e)
