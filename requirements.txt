@@ -4,3 +4,4 @@ numpy
 lightgbm
 scikit-learn
 joblib
+pip install streamlit pandas numpy matplotlib seaborn
