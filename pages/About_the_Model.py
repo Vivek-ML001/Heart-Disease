@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("ℹ️ About the Model")
+st.title(" About the Model")
 st.caption("Understanding the machine learning system behind the predictions")
 
 st.markdown("---")
