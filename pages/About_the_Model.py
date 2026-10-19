@@ -105,34 +105,31 @@ st.markdown("""
 """)
 
 # Evaluation
+
 st.header("6. Model Evaluation")
 
 st.markdown("""
-Model quality should be assessed on a **held-out test dataset** that was not
-used to train or tune the model.
-
-Recommended evaluation metrics include:
+The model was evaluated using **5-fold stratified cross-validation**.
+Stratification helps preserve the approximate class distribution across
+the folds.
 """)
 
-metric_cols = st.columns(5)
-for col, metric, explanation in zip(
-    metric_cols,
-    ["ROC-AUC", "Accuracy", "Precision", "Recall", "F1-score"],
-    [
-        "Ranking ability across thresholds",
-        "Overall proportion correct",
-        "Reliability of positive predictions",
-        "Ability to identify positive cases",
-        "Balance of precision and recall"
-    ]
-):
-    with col:
-        st.markdown(f"**{metric}**")
-        st.caption(explanation)
+col1, col2 = st.columns(2)
 
-st.warning(
-    "Add the actual held-out test metrics from your evaluation dashboard here. "
-    "Do not report cross-validation results as test-set performance."
+with col1:
+    st.metric("Cross-Validation ROC-AUC", "0.9551")
+
+with col2:
+    st.metric("Evaluation Method", "5-Fold Stratified CV")
+
+st.caption(
+    "Random state: 42. This result represents cross-validation performance, "
+    "not independent held-out test-set performance."
+)
+
+st.info(
+    "ROC-AUC measures how well the model ranks examples from the two classes "
+    "across different classification thresholds. It is not the same as accuracy."
 )
 
 # Limitations
