@@ -1,7 +1,9 @@
 streamlit
 pandas
 numpy
-lightgbm
+matplotlib
+seaborn
 scikit-learn
+lightgbm
 joblib
-pip install streamlit pandas numpy matplotlib seaborn
+openpyxl
